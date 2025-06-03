@@ -1,14 +1,14 @@
 {
-  "name": "@amicaldo/strapi-google-maps",
+  "name": "strapi-google-maps",
   "version": "2.0.2",
-  "description": "A Google Maps custom field for Strapi, allowing you to pick a location.",
+  "description": "This is a fork from @amicaldo/strapi-google-maps",
   "type": "commonjs",
   "repository": {
     "type": "git",
-    "url": "https://github.com/amicaldo/strapi-google-maps.git"
+    "url": "https://github.com/coderat-collective/strapi-google-maps.git"
   },
   "bugs": {
-    "url": "https://github.com/amicaldo/strapi-google-maps/issues"
+    "url": "https://github.com/coderat-collective/strapi-google-maps/issues"
   },
   "homepage": "https://github.com/amicaldo/strapi-google-maps",
   "strapi": {
