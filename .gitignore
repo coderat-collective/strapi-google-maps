@@ -97,10 +97,11 @@ public/uploads/*
 
 ############################
 # Build
+# Do not gitignore, we need it :)
 ############################
 
-dist
-build
+# dist
+# build
 
 
 ############################
