@@ -10,8 +10,33 @@ import Geohash from 'latlon-geohash';
 import MapView from './MapView';
 import NumberFields from './CoordsInput';
 import { useAuth } from '@strapi/strapi/admin';
+import { GoogleMapsProvider } from './GoogleMapsProvider';
 
-export default function Input({ attribute, onChange, value, name, required }: any) {
+interface InputProps {
+  attribute: any;
+  onChange: (event: any) => void;
+  value: any;
+  name: string;
+  required?: boolean;
+  label?: string;
+  placeholder?: string;
+  hint?: string;
+  disabled?: boolean;
+  intlLabel?: {
+    id: string;
+    defaultMessage: string;
+  };
+}
+
+export default function Input({ 
+  attribute, 
+  onChange, 
+  value, 
+  name, 
+  required, 
+  label,
+  intlLabel 
+}: InputProps) {
   const { formatMessage } = useIntl();
 
   const config = useConfig();
@@ -103,12 +128,17 @@ export default function Input({ attribute, onChange, value, name, required }: an
     setCurrentAddress('');
   };
 
+  // Determine the label to display
+  const displayLabel = label || 
+    (intlLabel ? formatMessage(intlLabel) : formatMessage({
+      id: 'input.label',
+      defaultMessage: 'Location Picker'
+    }));
+
   return (
     <>
       <Typography variant="pi" fontWeight="bold">
-        {formatMessage({
-          id: 'input.label',
-        })}
+        {displayLabel}
       </Typography>
 
       {!config && (
@@ -118,7 +148,7 @@ export default function Input({ attribute, onChange, value, name, required }: an
       )}
 
       {!!config && (
-        <>
+        <GoogleMapsProvider config={config}>
           <Box marginTop={1} borderColor={nothingSelectedWarning ? 'danger600' : 'primary200'}>
             <MapView
               config={config}
@@ -155,7 +185,7 @@ export default function Input({ attribute, onChange, value, name, required }: an
               })}
             </Button>
           </Box>
-        </>
+        </GoogleMapsProvider>
       )}
     </>
   );
